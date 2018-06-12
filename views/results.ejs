@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<head>
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+   <!-- Compiled and minified JavaScript -->
+   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>  
+
+
+<style>
+    body, html{
+        height:100%;
+    }
+    
+    body{
+        background-image:url("http://clickwallpapers.com/1080p/cute-heart-wallpapers-desktop-background-On-Wallpaper-1080p-HD.jpg?");
+    
+    height:100%;
+     background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+        
+    }
+    
+    .container{
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+        width: 50%;
+
+    
+    }
+    
+    #gif{
+       display:block;
+       margin-left:auto;
+       margin-right:auto;
+       width:50%;
+    }
+    
+    .text{
+        text-align:center;
+    }
+    
+    .res{
+        text-align:center;
+    }
+    .number{
+        text-align:center;
+        font-family:monospace;
+        text-size:20px;
+    }
+    
+    
+</style>
+
+</head>
+<body>
+        <nav>
+     <div class="nav-wrapper light-blue accent-4">
+      <a href="/" class="brand-logo right">My App</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="/contact">Contact Me</a></li>
+      </ul>
+    </div>
+  </nav>
+    
+   <div class="container">
+       <h1 class="text">Results</h1>
+       
+      <img id="gif" src=" ">
+       
+       
+        <ol class="number">
+       <% data.forEach(function(group){ %>
+       <li class="res">
+           <%= group[0].substring(0,3) + group[1].substring(group[1].length -3) %> 
+           is a ship.
+       </li>
+       <% }) %>
+      </ol>
+     
+     
+    
+     
+   </div>
+   
+   
+   
+       
+   
+   
+</body>
+
+<script>
+    
+     function getGiphyData(){
+          var searchTerm = 'cute+hearts';
+          var url= 'https://api.giphy.com/v1/gifs/search?api_key=jotVhn94uyOT7RrL1Uiab9v8ZwFRcXGg&q='+searchTerm
+      
+          fetch(url)
+          .then( data => {
+             return data.json()
+          })
+          .then( json => {
+              console.log(json) 
+              
+              var arrayOfGifs= json.data
+              var random = Math.floor(Math.random() * arrayOfGifs.length)
+              var firstGif = arrayOfGifs[random].images.fixed_width.url
+              document.querySelector("#gif").setAttribute('src', firstGif)
+              
+          })
+          
+          .catch( error => {
+              console.log(error)
+          })
+          
+      }
+    getGiphyData()
+</script>
